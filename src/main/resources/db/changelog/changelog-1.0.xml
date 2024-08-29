@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Create the users table -->
+    <changeSet id="1" author="lazar">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Create the ingredients table -->
+    <changeSet id="2" author="lazar">
+        <createTable tableName="ingredients">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Create the recipes table -->
+    <changeSet id="3" author="lazar">
+        <createTable tableName="recipes">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(2000)"/>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Create the recipe_ingredients join table -->
+    <changeSet id="4" author="lazar">
+        <createTable tableName="recipe_ingredients">
+            <column name="recipe_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ingredient_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add foreign keys -->
+    <changeSet id="5" author="lazar">
+        <addForeignKeyConstraint
+                baseTableName="recipes"
+                baseColumnNames="user_id"
+                constraintName="fk_recipe_user"
+                referencedTableName="users"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="6" author="lazar">
+        <addForeignKeyConstraint
+                baseTableName="recipe_ingredients"
+                baseColumnNames="recipe_id"
+                constraintName="fk_recipe_ingredient_recipe"
+                referencedTableName="recipes"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="7" author="lazar">
+        <addForeignKeyConstraint
+                baseTableName="recipe_ingredients"
+                baseColumnNames="ingredient_id"
+                constraintName="fk_recipe_ingredient_ingredient"
+                referencedTableName="ingredients"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

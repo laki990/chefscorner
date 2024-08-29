@@ -1,0 +1,32 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Build output directories
+target/
+build/
+
+# IntelliJ IDEA specific files
+.idea/
+*.iml
+
+# Project-specific files
+*.iws
+
+# Gradle specific files
+.gradle/
+
+# Maven specific files
+.mvn/
+
+# Package files
+*.jar
+*.war
+*.zip
+*.tar.gz
+
+# Virtual machine crash logs
+hs_err_pid*
+replay_pid*
