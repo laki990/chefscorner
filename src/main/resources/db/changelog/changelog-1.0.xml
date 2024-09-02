@@ -23,7 +23,7 @@
     <!-- Create the ingredients table -->
     <changeSet id="2" author="lazar">
         <createTable tableName="ingredients">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
