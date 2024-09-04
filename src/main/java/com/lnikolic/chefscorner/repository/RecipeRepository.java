@@ -1,2 +1,7 @@
-package com.lnikolic.chefscorner.repository;public class RecipeRepository {
+package com.lnikolic.chefscorner.repository;
+
+import com.lnikolic.chefscorner.entity.Recipe;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 }
